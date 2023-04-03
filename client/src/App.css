@@ -1,5 +1,57 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
 body {
-  background-image: linear-gradient(to right, #00d2ff, #3a7bd5);
+  background-color: transparent;
+  background-image: url('https://wallpaperboat.com/wp-content/uploads/2019/10/best-background-for-website-01.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  font-family: 'Oxygen', sans-serif;
+  color: black;
+  font-size: 19px;
+  text-align: center;
+}
+
+@media screen and (max-width: 480px) {
+  body {
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+  }
+}
+
+h1,
+h2,
+h3 {
+  background: -webkit-linear-gradient(#eee, #2196f3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+}
+
+li {
+  width: fit-content;
+  transition: .2s;
+  color: antiquewhite;
+}
+
+li:hover {
+  background-color: aliceblue;
+  color: #333;
+  box-shadow: 0 0 20px white, 0 0 40px white;
+  border-radius: 10px;
+  border-bottom: 3px solid rgb(53, 53, 53);
 }
 
 .NavBar {
@@ -7,13 +59,10 @@ body {
   flex-direction: row;
   justify-content: space-around;
   padding: 20px;
-  opacity: 0;
+  opacity: 1;
   transition: .5s;
 }
 
-.NavBar:hover {
-  opacity: 1;
-}
 
 .links {
   border-radius: 5px;
@@ -30,7 +79,6 @@ a:hover {
   color: #255784;
   background: #2196f3;
   box-shadow: 0 0 10px #2196f3, 0 0 40px #2196f3, 0 0 80px #2196f3;
-  font-size: 30px;
 }
 
 .P1,
@@ -45,8 +93,8 @@ a:hover {
   border-radius: 20px;
   padding: 5px;
   width: fit-content;
-  /* margin-left: 44%; */
   animation-duration: 4s;
+  box-shadow: 0 0 20px rgb(115, 179, 231);
   animation-iteration-count: infinite;
 }
 
@@ -72,6 +120,7 @@ a:hover {
 .footer {
   display: flex;
   justify-content: space-around;
+  margin-top: 60vh;
 }
 
 .footerNavLink {
@@ -79,6 +128,96 @@ a:hover {
   height: 50px;
   border-radius: 100px;
   background-color: aqua;
+}
+
+:root {
+  --bar-width: 60px;
+  --bar-height: 8px;
+  --hamburger-gap: 6px;
+  --foreground: #66fcf1;
+  --background: #1f2833;
+  --hamburger-margin: 20px;
+  --animation-timing: 200ms ease-in-out;
+  --hamburger-height: calc(var(--bar-height)*3 + var(--hamburger-gap)*2)
+}
+
+.hamburger-menu {
+  --x-width: calc(var(--hamburger-height)* 1.41421356237);
+  display: flex;
+  flex-direction: column;
+  gap: var(--hamburger-gap);
+  width: max-content;
+  position: absolute;
+  top: var(--hamburger-margin);
+  left: var(--hamburger-margin);
+  z-index: 2;
+  cursor: pointer
+}
+
+
+a {
+  color: #c5c6c7;
+  text-decoration: none;
+  background-color: #1f2833;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.hamburger-menu:has(input:checked) {
+  --foreground: #1f2833;
+  --background: #66fcf1
+}
+
+.hamburger-menu::before,
+.hamburger-menu::after,
+.hamburger-menu input {
+  content: "";
+  width: var(--bar-width);
+  height: var(--bar-height);
+  background-color: var(--foreground);
+  border-radius: 20px;
+  transform-origin: left center;
+  transition: opacity var(--animation-timing), width var(--animation-timing), rotate var(--animation-timing), translate var(--animation-timing), background-color var(--animation-timing), ;
+}
+
+.hamburger-menu input {
+  appearance: none;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  pointer-events: none;
+}
+
+.hamburger-menu:has(input:checked)::before {
+  rotate: 45deg;
+  width: var(--x-width);
+  translate: 0 calc(var(--bar-height)/-2);
+}
+
+.hamburger-menu:has(input:checked)::after {
+  rotate: -45deg;
+  width: var(--x-width);
+  translate: 0 calc(var(--bar-height)/2);
+}
+
+.hamburger-menu input:checked {
+  opacity: 0;
+  width: 0;
+}
+
+.sidebar {
+  border-radius: 20px;
+  transition: translate var(--animation-timing);
+  translate: -150%;
+  padding: 0.5rem;
+  padding-top: calc(var(--hamburger-height) + var(--hamburger-margin) + 0.002px);
+  background-color: var(--foreground);
+  color: var(--background);
+  max-width: 180vh;
+}
+
+.hamburger-menu:has(input:checked)+.sidebar {
+  translate: 0;
 }
 
 @media screen and (max-width: 480px) {
